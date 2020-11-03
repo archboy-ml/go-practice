@@ -1,4 +1,4 @@
-package main
+package linkedList
 
 import "fmt"
 
@@ -118,13 +118,14 @@ func (l *List) ShowList() {
 	if !l.IsEmpty() {
 		cur := l.headNode
 		for {
-			fmt.Printf("%v\n", cur.Data)
+			fmt.Printf("%v\t", cur.Data)
 			if  cur.Next != nil {
 				cur = cur.Next
 			} else {
 				break
 			}
 		}
+		fmt.Println()
 	} else {
 		fmt.Println("List为空")
 	}
@@ -147,7 +148,7 @@ func ReverseList(list List) List {
 		}
 		result.headNode = node
 	}
-	fmt.Printf("%v\n", result)
+	//fmt.Printf("%v\n", result)
 	return result
 }
 
