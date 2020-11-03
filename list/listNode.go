@@ -151,15 +151,3 @@ func ReverseList(list List) List {
 	//fmt.Printf("%v\n", result)
 	return result
 }
-
-func main() {
-	var list List
-	for i:=1;i<6;i++ {
-		list.Append(i)
-	}
-	list.ShowList()
-	println("================================")
-	var l List
-	l = ReverseList(list)
-	l.ShowList()
-}
