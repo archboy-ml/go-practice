@@ -52,6 +52,68 @@ func (l *List) Append(data Object) {
 	}
 }
 
+func (l *List) Insert(index int, data Object)  {
+	if index <= 0 {
+		l.Shift(data)
+	} else if index > l.Length() {
+		l.Append(data)
+	} else {
+		pre := l.headNode
+		count := 0
+		for count < (index-1) {
+			pre = pre.Next
+			count++
+		}
+		node := &Node{Data:index}
+		node.Next = pre.Next
+		pre.Next = node
+	}
+}
+
+func (l *List) remove(data Object) {
+	pre := l.headNode
+	if pre.Data == data {
+		l.headNode = pre.Next
+	} else {
+		for pre.Next != nil {
+			if pre.Next.Data == data {
+				pre.Next = pre.Next.Next
+			} else {
+				pre = pre.Next
+			}
+		}
+	}
+}
+
+func (l *List) removeAtIndex(index int) {
+	pre := l.headNode
+	if index <= 0 {
+		l.headNode = pre.Next
+	} else if index > l.Length() {
+		fmt.Println("超出链表长度")
+		return
+	} else {
+		count := 0
+		for count < (index-1) && pre.Next != nil {
+			pre = pre.Next
+			count++
+		}
+		pre.Next = pre.Next.Next
+	}
+}
+
+func (l *List) Contain(data Object) bool {
+	cur := l.headNode
+	for cur.Next != nil {
+		if cur.Data == data {
+			return true
+		} else {
+			cur = cur.Next
+		}
+	}
+	return false
+}
+
 func (l *List) ShowList() {
 	if !l.IsEmpty() {
 		cur := l.headNode
@@ -68,8 +130,25 @@ func (l *List) ShowList() {
 	}
 }
 
-func reverseList(list List) {
-
+func ReverseList(list List) List {
+	head := list.headNode
+	var result List
+	if head == nil {
+		fmt.Println("List为空")
+		result = List{}
+	} else {
+		node := &Node{Data:head.Data}
+		cur := head.Next
+		for cur != nil {
+			current := cur
+			cur = cur.Next
+			current.Next = node
+			node = current
+		}
+		result.headNode = node
+	}
+	fmt.Printf("%v\n", result)
+	return result
 }
 
 func main() {
@@ -78,4 +157,8 @@ func main() {
 		list.Append(i)
 	}
 	list.ShowList()
+	println("================================")
+	var l List
+	l = ReverseList(list)
+	l.ShowList()
 }
