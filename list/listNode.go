@@ -64,13 +64,13 @@ func (l *List) Insert(index int, data Object)  {
 			pre = pre.Next
 			count++
 		}
-		node := &Node{Data:index}
+		node := &Node{Data:data}
 		node.Next = pre.Next
 		pre.Next = node
 	}
 }
 
-func (l *List) remove(data Object) {
+func (l *List) Remove(data Object) {
 	pre := l.headNode
 	if pre.Data == data {
 		l.headNode = pre.Next
@@ -85,7 +85,7 @@ func (l *List) remove(data Object) {
 	}
 }
 
-func (l *List) removeAtIndex(index int) {
+func (l *List) RemoveAtIndex(index int) {
 	pre := l.headNode
 	if index <= 0 {
 		l.headNode = pre.Next
