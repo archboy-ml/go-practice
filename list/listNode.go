@@ -10,11 +10,11 @@ type Node struct {
 }
 
 type List struct {
-	headNode *Node // 头节点
+	HeadNode *Node // 头节点
 }
 
 func (l *List) IsEmpty() bool {
-	if l.headNode == nil {
+	if l.HeadNode == nil {
 		return true
 	} else {
 		return false
@@ -23,7 +23,7 @@ func (l *List) IsEmpty() bool {
 
 func (l *List) Length() int {
 	// 获取链表头节点
-	cur := l.headNode
+	cur := l.HeadNode
 	count := 0
 	for cur != nil {
 		count++
@@ -34,17 +34,17 @@ func (l *List) Length() int {
 
 func (l *List) Shift(data Object) *Node {
 	node := &Node{Data:data}
-	node.Next = l.headNode
-	l.headNode = node
+	node.Next = l.HeadNode
+	l.HeadNode = node
 	return node
 }
 
 func (l *List) Append(data Object) {
 	node := &Node{Data:data}
 	if l.IsEmpty() {
-		l.headNode = node
+		l.HeadNode = node
 	} else {
-		cur := l.headNode
+		cur := l.HeadNode
 		for cur.Next != nil {
 			cur = cur.Next
 		}
@@ -58,7 +58,7 @@ func (l *List) Insert(index int, data Object)  {
 	} else if index > l.Length() {
 		l.Append(data)
 	} else {
-		pre := l.headNode
+		pre := l.HeadNode
 		count := 0
 		for count < (index-1) {
 			pre = pre.Next
@@ -71,9 +71,9 @@ func (l *List) Insert(index int, data Object)  {
 }
 
 func (l *List) Remove(data Object) {
-	pre := l.headNode
+	pre := l.HeadNode
 	if pre.Data == data {
-		l.headNode = pre.Next
+		l.HeadNode = pre.Next
 	} else {
 		for pre.Next != nil {
 			if pre.Next.Data == data {
@@ -86,9 +86,9 @@ func (l *List) Remove(data Object) {
 }
 
 func (l *List) RemoveAtIndex(index int) {
-	pre := l.headNode
+	pre := l.HeadNode
 	if index <= 0 {
-		l.headNode = pre.Next
+		l.HeadNode = pre.Next
 	} else if index > l.Length() {
 		fmt.Println("超出链表长度")
 		return
@@ -103,7 +103,7 @@ func (l *List) RemoveAtIndex(index int) {
 }
 
 func (l *List) Contain(data Object) bool {
-	cur := l.headNode
+	cur := l.HeadNode
 	for cur.Next != nil {
 		if cur.Data == data {
 			return true
@@ -116,7 +116,7 @@ func (l *List) Contain(data Object) bool {
 
 func (l *List) ShowList() {
 	if !l.IsEmpty() {
-		cur := l.headNode
+		cur := l.HeadNode
 		for {
 			fmt.Printf("%v\t", cur.Data)
 			if  cur.Next != nil {
@@ -132,7 +132,7 @@ func (l *List) ShowList() {
 }
 
 func ReverseList(list List) List {
-	head := list.headNode
+	head := list.HeadNode
 	var result List
 	if head == nil {
 		fmt.Println("List为空")
@@ -146,7 +146,7 @@ func ReverseList(list List) List {
 			current.Next = node
 			node = current
 		}
-		result.headNode = node
+		result.HeadNode = node
 	}
 	//fmt.Printf("%v\n", result)
 	return result
